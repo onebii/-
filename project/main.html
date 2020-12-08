@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    * {margin: 0; padding: 0; box-sizing: border-box }
+    
+
+     body {
+        font-family: Arial, Helvetica, sans-serif;
+        display: inline-block;
+        width: 1450px;
+        position: relative;
+        /* justify-content: center; */
+    } 
+    .header{
+        height: 100px;
+        display: flex;
+        align-items: center;
+    }
+    img{
+        margin-left: 1200px;
+        width: 30px;
+        height: 30px;
+        object-fit: contain;
+    }
+    .main{
+        margin: 0 0 0 100px;
+    }
+    .dept-name{
+        font-size: 50px;
+    }
+    /* .main .check-container:after{ clear: both; display: block; content: '' } */
+    .check-container{
+        float: left;
+    }
+    .check-left{
+        padding: 20px;
+        float: left;
+        width: 990px;
+        height: 100%;
+        background-color: tomato;
+        text-align: right;
+    }
+    .check-right{
+        padding: 20px;
+        float: left;
+        width: 350px;
+        height: 100%;
+        background-color: yellow;
+    }
+</style>
+
+<head>
+    <meta charset="UTF-8">
+    <title>GSM Check</title>
+</head>
+
+<body>
+    <form action="" style="border:1px solid #ccc">
+        <header class="header">
+            <img id="profileimg" src="public/user.png">
+                <!-- 학번이름 가져와서 넣기 -->
+                <label class="user-info">학번이름<br>이 표시 될 위치</label>
+        </header>
+        <main class="main">
+            <div class="dept-name">
+                <!-- 동아리, 방과후 이름 가져와서 넣기 -->
+                <label>동아리명</label>
+            </div>
+            <div class="check-container">
+                <div class="check-left">
+                    <label>전체 선택</label>
+                    <!-- 학년별 출석부 명단 가져와서 넣기 -->
+                </div>
+                <div class="check-right">
+                    <!-- 여기도 추가 -->
+                    <p><label>전체 인원 명</label></p>
+                    <p><label>출석 확인 명</label></p>
+                    <p><label>미확인 명</label></p>
+                    <p><label>결석 명</label></p>
+                    <button type="" class="submitbtn">제출하기</button>
+                </div>
+            </div>
+        </main>
+    </form>
+
+</body>
+
+</html>
