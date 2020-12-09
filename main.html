@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box
+    }
+
+
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        display: inline-block;
+        width: 1450px;
+        position: relative;
+        /* justify-content: center; */
+    }
+
+    .header {
+        height: 100px;
+        display: flex;
+        align-items: center;
+    }
+
+    img {
+        margin-left: 1105px;
+        width: 30px;
+        height: 30px;
+        object-fit: contain;
+    }
+    .user-info{
+        float: left;
+        margin-left: 20px;
+    }
+    .logout{
+        float: left;
+        margin-left: 20px;
+        margin-top: 13px;
+        border: none;
+        background-color: #ffffff;
+        font-size: 15px;
+        color: gray;
+    }
+
+    .main {
+        margin: 0 0 0 100px;
+    }
+
+    .dept-name {
+        font-size: 50px;
+    }
+
+    /* .main .check-container:after{ clear: both; display: block; content: '' } */
+    .check-container {
+        float: left;
+    }
+
+    .check-left {
+        padding: 20px;
+        float: right;
+        width: 990px;
+        height: 100%;
+        text-align: right;
+    }
+
+    .check-right {
+        position: absolute;
+        right: 10px;
+        padding: 20px;
+        width: 350px;
+        height: 100%;
+        overflow: scroll;
+    }
+    .grade{
+        float: left;
+        margin: 0 200px 0 50px;
+    }
+
+
+</style>
+
+<head>
+    <meta charset="UTF-8">
+    <title>GSM Check</title>
+</head>
+
+<body>
+    <form action="" style="border:1px solid #ccc">
+        <header class="header">
+            <img id="profileimg" src="public/user.png">
+            <!-- 학번이름 가져와서 넣기 -->
+            <label class="user-info">2220<br>황원비</label>
+            <a href="login.html" class="logout">Logout</a>
+        </header>
+        <main class="main">
+            <div class="dept-name">
+                <!-- 동아리 이름 가져와서 넣기 -->
+                <label>더무비</label>
+            </div>
+
+            <div class="check-container">
+                <div class="check-left">
+                    <input type="checkbox">전체 선택</input>
+
+                    <!-- 학년별 출석부 명단 가져와서 넣기 -->
+                </div>
+
+                <div class="check-right">
+                    <!-- 여기도 추가 -->
+                    <p><label>전체 인원 명</label></p>
+                    <p><label>출석 확인 명</label></p>
+                    <p><label>미확인 명</label></p>
+                    <p><label>결석 명</label></p>
+                    <button type="" class="submitbtn">제출하기</button>
+                </div>
+                
+                <div class="checklist">
+                    <div class="grade">
+                        <h2>1학년</h2>
+                        <br><input type="checkbox">김아련</input></br>
+                    </div>
+                    <div class="grade">
+                        <h2>2학년</h2>
+                        <br><input type="checkbox">김아련</input></br>
+                    </div>
+                    <div class="grade">
+                        <h2>3학년</h2>
+                        <br><input type="checkbox">김아련</input></br>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </form>
+
+</body>
+
+</html>
