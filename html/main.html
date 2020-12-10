@@ -28,11 +28,13 @@
         height: 30px;
         object-fit: contain;
     }
-    .user-info{
+
+    .user-info {
         float: left;
         margin-left: 20px;
     }
-    .logout{
+
+    .logout {
         float: left;
         margin-left: 20px;
         margin-top: 13px;
@@ -71,13 +73,54 @@
         height: 100%;
         overflow: scroll;
     }
-    .grade{
+
+    .grade {
         float: left;
         margin: 0 200px 0 50px;
     }
-
-
 </style>
+<script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.checkAll').click(function () {
+            $('.student').prop('checked', this.checked);
+        });
+    });
+        
+    var cnt = 0;
+    var chk1 = document.getElementById("s1");
+    var chk2 = document.getElementById("s2");
+    var chk3 = document.getElementById("s3");
+    
+    function check(chk_obj) {
+    if(chk_obj.checked == true) {
+        cnt++;
+        console.log(cnt);
+    } else {
+        cnt--;
+        console.log(cnt);
+    }
+}
+
+    function CheckForm(Join) {
+        //체크박스 체크여부 확인 [동일 이름을 가진 체크박스 여러개일 경우]
+        var isChk = false;
+        var arr_Student = document.getElementsByClassName("student");
+        for (var i = 0; i < arr_Student.length; i++) {
+            if (arr_Student[i].checked == true) {
+                isChk = true;
+                break;
+            }
+        }
+
+        if (!isChk) {
+            alert("출석 확인이 한 명도 되지 않았습니다.");
+            return false;
+        }
+    }
+    console.log("전체: " + $("input:checkbox[name='student']").length);
+    console.log("선택: " + $("input:checkbox[name='student']:checked").length);
+</script>
 
 <head>
     <meta charset="UTF-8">
@@ -85,9 +128,9 @@
 </head>
 
 <body>
-    <form action="" style="border:1px solid #ccc">
+    <form name="frmJoin" action="" style="border:1px solid #ccc" onSubmit="return CheckForm(this)">
         <header class="header">
-            <img id="profileimg" src="public/user.png">
+            <img id="profileimg" src="../public/user.png">
             <!-- 학번이름 가져와서 넣기 -->
             <label class="user-info">2220<br>황원비</label>
             <a href="login.html" class="logout">Logout</a>
@@ -100,7 +143,7 @@
 
             <div class="check-container">
                 <div class="check-left">
-                    <input type="checkbox">전체 선택</input>
+                    <input type="checkbox" class="checkAll" >전체 선택</input>
 
                     <!-- 학년별 출석부 명단 가져와서 넣기 -->
                 </div>
@@ -108,30 +151,49 @@
                 <div class="check-right">
                     <!-- 여기도 추가 -->
                     <p><label>전체 인원 명</label></p>
-                    <p><label>출석 확인 명</label></p>
+                    <p><label>출석 확인 <span id="cnt">0</span> 명</label></p>
                     <p><label>미확인 명</label></p>
                     <p><label>결석 명</label></p>
-                    <button type="" class="submitbtn">제출하기</button>
+                    <button type="submit" class="submit">제출하기</button>
                 </div>
-                
+
                 <div class="checklist">
                     <div class="grade">
                         <h2>1학년</h2>
-                        <br><input type="checkbox">김아련</input></br>
+                        <br><input type="checkbox" name="student" id="s1" class="student" onclick="btnchecked()">김아련</input></br>
                     </div>
                     <div class="grade">
                         <h2>2학년</h2>
-                        <br><input type="checkbox">김아련</input></br>
+                        <br><input type="checkbox" name="student" id="s2" class="student" onclick="btnchecked()">김아련</input></br>
                     </div>
                     <div class="grade">
                         <h2>3학년</h2>
-                        <br><input type="checkbox">김아련</input></br>
+                        <br><input type="checkbox" name="student" id="s3" class="student" onclick="btnchecked()">김아련</input></br>
                     </div>
                 </div>
             </div>
         </main>
     </form>
-
+    <script>
+        const s1 = document.getElementById("s1");
+        const s2 = document.getElementById("s2");
+        const s3 = document.getElementById("s3");
+        const p = document.getElementById("cnt");
+  
+        function btnchecked() {
+          let cnt = 0;
+          if (s1.checked == true) {
+            cnt++;
+          }
+          if (s2.checked == true) {
+            cnt++;
+          }
+          if (s3.checked == true) {
+            cnt++;
+          }
+          p.innerText = cnt;
+        }
+  </script>
 </body>
 
 </html>
