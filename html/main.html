@@ -81,45 +81,64 @@
 </style>
 <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
-    $(document).ready(function () {
-        $('.checkAll').click(function () {
-            $('.student').prop('checked', this.checked);
-        });
-    });
-        
-    var cnt = 0;
-    var chk1 = document.getElementById("s1");
-    var chk2 = document.getElementById("s2");
-    var chk3 = document.getElementById("s3");
-    
-    function check(chk_obj) {
-    if(chk_obj.checked == true) {
-        cnt++;
-        console.log(cnt);
-    } else {
-        cnt--;
-        console.log(cnt);
-    }
-}
+    // 체크박스 전체 선택
+    // $(document).ready(function () {
+    //     $('.checkAll').click(function () {
+    //         $('.student').prop('checked', this.checked);
+    //     });
+    // });
+
+
+    //     var chk1 = document.getElementById("s1");
+    //     var chk2 = document.getElementById("s2");
+    //     var chk3 = document.getElementById("s3");
+
+    //     function check(chk_obj) {
+    //     if(chk_obj.checked == true) {
+    //         cnt++;
+    //         console.log(cnt);
+    //     } else {
+    //         cnt--;
+    //         console.log(cnt);
+    //     }
+    // }
+
+
+
+    var arr_Student = document.getElementsByClassName("student");
 
     function CheckForm(Join) {
         //체크박스 체크여부 확인 [동일 이름을 가진 체크박스 여러개일 경우]
+        //출석을 한 명도 확인하지 않을 경우 경고
         var isChk = false;
-        var arr_Student = document.getElementsByClassName("student");
         for (var i = 0; i < arr_Student.length; i++) {
             if (arr_Student[i].checked == true) {
                 isChk = true;
                 break;
             }
         }
-
         if (!isChk) {
             alert("출석 확인이 한 명도 되지 않았습니다.");
             return false;
         }
     }
-    console.log("전체: " + $("input:checkbox[name='student']").length);
-    console.log("선택: " + $("input:checkbox[name='student']:checked").length);
+
+    function btnchecked() {
+        // let cnt = 0;
+        const p = document.getElementById("checkcnt");
+        console.log("전체: " + $("input:checkbox[name='student']").length);
+        console.log("선택: " + $("input:checkbox[name='student']:checked").length);
+        p.innerText = $("input:checkbox[name='student']:checked").length;
+    }
+    function allCheckBtn() {
+        if ($("#checkAll").prop('checked') == true) {
+            $("input[name=student]:checkbox").prop("checked", true);
+        } else {
+            $("input[name=student]:checkbox").prop("checked", false);
+        }
+
+        btnchecked();
+    }
 </script>
 
 <head>
@@ -143,7 +162,7 @@
 
             <div class="check-container">
                 <div class="check-left">
-                    <input type="checkbox" class="checkAll" >전체 선택</input>
+                    <input type="checkbox" id="checkAll" class="checkAll" onclick="allCheckBtn()"> 전체 선택</input>
 
                     <!-- 학년별 출석부 명단 가져와서 넣기 -->
                 </div>
@@ -151,7 +170,7 @@
                 <div class="check-right">
                     <!-- 여기도 추가 -->
                     <p><label>전체 인원 명</label></p>
-                    <p><label>출석 확인 <span id="cnt">0</span> 명</label></p>
+                    <p><label>출석 확인 <span id="checkcnt">0</span> 명</label></p>
                     <p><label>미확인 명</label></p>
                     <p><label>결석 명</label></p>
                     <button type="submit" class="submit">제출하기</button>
@@ -160,40 +179,48 @@
                 <div class="checklist">
                     <div class="grade">
                         <h2>1학년</h2>
-                        <br><input type="checkbox" name="student" id="s1" class="student" onclick="btnchecked()">김아련</input></br>
+                        <br><input type="checkbox" name="student" id="s1" class="student"
+                            onclick="btnchecked()">김아련</input></br>
                     </div>
                     <div class="grade">
                         <h2>2학년</h2>
-                        <br><input type="checkbox" name="student" id="s2" class="student" onclick="btnchecked()">김아련</input></br>
+                        <br><input type="checkbox" name="student" id="s2" class="student"
+                            onclick="btnchecked()">김아련</input></br>
                     </div>
                     <div class="grade">
                         <h2>3학년</h2>
-                        <br><input type="checkbox" name="student" id="s3" class="student" onclick="btnchecked()">김아련</input></br>
+                        <br><input type="checkbox" name="student" id="s3" class="student"
+                            onclick="btnchecked()">김아련</input></br>
                     </div>
                 </div>
             </div>
         </main>
     </form>
     <script>
-        const s1 = document.getElementById("s1");
-        const s2 = document.getElementById("s2");
-        const s3 = document.getElementById("s3");
-        const p = document.getElementById("cnt");
-  
-        function btnchecked() {
-          let cnt = 0;
-          if (s1.checked == true) {
-            cnt++;
-          }
-          if (s2.checked == true) {
-            cnt++;
-          }
-          if (s3.checked == true) {
-            cnt++;
-          }
-          p.innerText = cnt;
-        }
-  </script>
+        // const s1 = document.getElementById("s1");
+        // const s2 = document.getElementById("s2");
+        // const s3 = document.getElementById("s3");
+        // const all = document.getElementById("all");
+        // const p = document.getElementById("cnt");
+
+        // function btnchecked() {
+        //   let cnt = 0;
+        //   if (s1.checked == true) {
+        //     cnt++;
+        //   }
+        //   if (s2.checked == true) {
+        //     cnt++;
+        //   }
+        //   if (s3.checked == true) {
+        //     cnt++;
+        //   }
+        //   if(all.checked==true){
+
+
+        //   }
+        //   p.innerText = cnt;
+        // }
+    </script>
 </body>
 
 </html>
