@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap');
+
+    * {
+        margin: 70;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 80vh;
+    margin: 20px;
+    }
+    hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 25px;
+  }
+
+    .login-form {
+        position: relative;
+        z-index: 2;
+    }
+
+    .login-form h1 {
+        font-size: 32px;
+        text-align: left;
+        margin-bottom: 15px;
+    }
+
+    .int-area {
+        margin-top: 20px;
+        width: 400px;
+        position: relative;
+    }
+
+    .int-area :first-child {
+        margin-top: 0;
+    }
+
+    .int-area input {
+        width: 100%;
+        padding: 10px 10px;
+        background-attachment: transparant;
+        margin-top: 10px;
+    }
+
+    .int-area label {
+        /* position: absolute; left: 10px; top: 15px; */
+        font-size: 15px;
+        color: #000000;
+    }
+
+    /* .int-area label.warning{
+    color: red !important;
+    animation: warning .3s ease;
+    animation-iteration-count: 3;
+}
+@keyframes warning{
+    0% {transform: translateX(-8px);}
+    25% {transform: translateX(8px);}
+    50% {transform: translateX(-8px);}
+    75% {transform: translateX(8px);}
+} */
+    .btn-area {
+        margin-top: 30px;
+    }
+
+    .btn-area button {
+        width: 100%;
+        height: 40px;
+        background: #4CAF50;
+        color: #fff;
+        font-size: 15px;
+        border: none;
+        cursor: pointer;
+    }
+
+    .signup-btn {
+        margin-top: 20px;
+        text-align: center;
+        font-size: 10px;
+        color: f44336;
+    }
+</style>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+
+<body>
+    <section class="login-form">
+        <h1>로그인</h1>
+        <hr>
+        <form action="/login" method="POST">
+            <div class="login-input-container">
+                <div class="int-area">
+                    <label for="e-mail">이메일</label>
+                    <input placeholder="이메일을 입력하세요" type="text" name="e_mail" id="e_mail" autocomplete="off" required>
+                </div>
+                <div class="int-area">
+                    <label for="pw">비밀번호</label>
+                    <input placeholder="비밀번호를 입력하세요" type="password" name="pw" id="pw" autocomplete="off" required>
+                </div>
+            </div>
+            <div class="btn-area">
+                <button id="btn" type="submit">로그인</button>
+            </div>
+        </form>
+    </hr>
+        <div class="signup-btn">
+            <a href="register.html" class="signup">회원가입</a>
+        </div>
+    </section>
+
+    <!-- <script>
+        let id = $('#e-mail');
+        let pw = $('#pw');
+        let btn = $('#btn');
+
+        $(btn).on('click', function() {
+            console.log("btn is clicked");
+            if($(id).val() == ""){
+                $(id).next('label').addClass('warning');
+                setTimeout(function(){
+                    $('label').removeClass('warning')
+                }, 1500);
+            }
+            else if($(pw).val() == ""){
+                $(pw).next('label').addClass('warning');
+            }
+        });
+    </script> -->
+</body>
+
+</html>
