@@ -152,8 +152,14 @@
             <img id="profileimg" src="../public/user.png">
             <!-- 학번이름 가져와서 넣기 -->
 
-            <label class="user-info">2220<br>황원비</label>
-            <a href="login.html" class="logout">Logout</a>
+            <% if(e_mail) { %>
+            <label class="user-info">2220<br><%=e_mail%></label>
+            <a href="/logout" class="">logout</a>
+            <%} else { %>
+                <a href="/login" class="logout">Login</a>
+                <a href="/register" class="">register</a>
+            <% } %>
+            
         </header>
         <main class="main">
             <div class="dept-name">
