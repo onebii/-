@@ -14,17 +14,17 @@ router.post('/login', function(req, res){
   let e_mail = data.e_mail;
   let pw = data.pw;
 
-  // 데이터베이스에 이메일 있는지 확인
+  // 데이터베이스에서 이메일 찾기
   conn.query(`SELECT * FROM students where email = ?`, [e_mail], function(err, rows){
     if(err) console.log(err);
 
     if(!rows){
-      res.send('<script type="text/javascript">alert("이메일 다름"); window.location="/login"; </script>');
+      res.send('<script type="text/javascript">alert("이메일이 존재하지 않습니다."); window.location="/login"; </script>');
     } else {
       let Dpw = rows[0].pwd;  // 데이터베이스에 있는 비밀번호
 
       if(pw == Dpw){  // 입력한 비번이랑 같은지
-        // 같으면 세션 저장
+        // 세션 저장
         req.session.e_mail = e_mail;
         req.session.save(function(){
           res.render('main', {e_mail: req.session.e_mail});
@@ -44,6 +44,7 @@ router.post('/register', function(req, res){
   let psw = data.psw
   let club_id = data.club_id;
 
+  // ㄷㅔ이터베이스에 회원 정보 넣기
   conn.query(`insert into students(email, num, pwd, club_id) values(?, ?, ?, ?)`, [email, num, psw, club_id], function(err, rows){
     if(err) console.log(err);
  
@@ -53,12 +54,13 @@ router.post('/register', function(req, res){
   });
 });
 
+// 로그아웃 하기
 router.get('/logout',(req, res) => {
   req.session.destroy(function(err){
+    // 세션에서 삭제
     res.redirect('/login');
   });
 });
-
 
 router.get('/dbtest',(req, res) => {
   try {

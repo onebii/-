@@ -103,8 +103,6 @@
     //     }
     // }
 
-
-
     var arr_Student = document.getElementsByClassName("student");
 
     function CheckForm(Join) {
@@ -125,10 +123,10 @@
 
     function btnchecked() {
         // let cnt = 0;
-        const p = document.getElementById("checkcnt");
-        console.log("전체: " + $("input:checkbox[name='student']").length);
-        console.log("선택: " + $("input:checkbox[name='student']:checked").length);
-        p.innerText = $("input:checkbox[name='student']:checked").length;
+        const p1 = document.getElementById("checkcnt");
+        // console.log("전체: " + $("input:checkbox[name='student']").length);
+        // console.log("선택: " + $("input:checkbox[name='student']:checked").length);
+        p1.innerText = $("input:checkbox[name='student']:checked").length;
     }
     function allCheckBtn() {
         if ($("#checkAll").prop('checked') == true) {
