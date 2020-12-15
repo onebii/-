@@ -17,7 +17,7 @@ router.post('/login', function(req, res){
   conn.query(`SELECT * FROM students where email = ?`, [e_mail], function(err, rows){
     if(err) console.log(err);
 
-    if(!rows){
+    if(!(Array.isArray(rows) && rows.length)) {
       res.send('<script type="text/javascript">alert("이메일 다름"); window.location="/login"; </script>');
     } else {
       let Dpw = rows[0].pwd;  // 데이터베이스에 있는 비밀번호
@@ -42,17 +42,29 @@ router.post('/login', function(req, res){
 
 // 회원가입 하기
 router.post('/register', function(req, res){
-  let data = req.body;
-  let num = data.num;
-  let email = data.email;
-  let psw = data.psw
-  let club_id = data.club_id;
+  conn.query(`select count(*) as count from students where email = ?`, [req.body.email], (err, rows) => {
+    if (rows[0].count == 0) { // email 중복 체크
+      let data = req.body;
+      let email = data.email;
+      let num = data.num;
+      let psw = data.psw
+      let pswrp= data.psw_repeat;
+      let club_id = data.club_id;
+    
+      if (psw == pswrp) { // 비밀번호 확인
+        conn.query(`insert into students(email, num, pwd, club_id) values(?, ?, sha(?), ?)`, [email, num, psw, club_id], function(err, rows){
+          if(err) console.log(err);
+      
+          else {
+            res.render('main', {e_mail: req.session.e_mail});
+          }
+        });
 
-  conn.query(`insert into students(email, num, pwd, club_id) values(?, ?, sha(?), ?)`, [email, num, psw, club_id], function(err, rows){
-    if(err) console.log(err);
- 
-    else {
-      res.render('main', {e_mail: req.session.e_mail});
+      } else {
+        res.send('<script type="text/javascript">alert("비밀번호 불일치."); window.location="/register"; </script>');
+      }
+    } else {
+      res.send('<script type="text/javascript">alert("이메일이 중복입니다."); window.location="/register"; </script>');
     }
   });
 });

@@ -54,6 +54,10 @@ router.get('/main', function(req, res, next) {
   });
 });
 
+router.get('/', function(req, res) {
+  res.redirect('http://localhost:3000/main');
+});
+
 router.get('/list', function(req, res){
   res.render('list');
 });
