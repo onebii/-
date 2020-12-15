@@ -12,7 +12,6 @@ conn.query('use gsmcheck');
 router.post('/login', function(req, res){
   let data = req.body;
   let e_mail = data.e_mail;
-  let pw = data.pw;
 
   // 데이터베이스에 이메일 있는지 확인
   conn.query(`SELECT * FROM students where email = ?`, [e_mail], function(err, rows){
@@ -22,16 +21,21 @@ router.post('/login', function(req, res){
       res.send('<script type="text/javascript">alert("이메일 다름"); window.location="/login"; </script>');
     } else {
       let Dpw = rows[0].pwd;  // 데이터베이스에 있는 비밀번호
+      
+      conn.query(`SELECT sha(?) as pwd`, [data.pw], function(err, rows) {
+        if(err) console.log(err);
 
-      if(pw == Dpw){  // 입력한 비번이랑 같은지
-        // 같으면 세션 저장
-        req.session.e_mail = e_mail;
-        req.session.save(function(){
-          res.render('main', {e_mail: req.session.e_mail});
-       });
-      } else {
-        res.send('<script type="text/javascript">alert("비밀번호가 다릅니다."); window.location="/login"; </script>');
-      }
+        if(rows[0].pwd == Dpw){  // 입력한 비번이랑 같은지
+          // 같으면 세션 저장
+          req.session.e_mail = e_mail;
+
+          req.session.save(function(){
+            res.redirect('http://localhost:3000/main');
+         });
+        } else {
+          res.send('<script type="text/javascript">alert("비밀번호가 다릅니다."); window.location="/login"; </script>');
+        }
+      });
     }
   });
 });
@@ -44,7 +48,7 @@ router.post('/register', function(req, res){
   let psw = data.psw
   let club_id = data.club_id;
 
-  conn.query(`insert into students(email, num, pwd, club_id) values(?, ?, ?, ?)`, [email, num, psw, club_id], function(err, rows){
+  conn.query(`insert into students(email, num, pwd, club_id) values(?, ?, sha(?), ?)`, [email, num, psw, club_id], function(err, rows){
     if(err) console.log(err);
  
     else {

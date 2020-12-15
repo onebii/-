@@ -125,11 +125,18 @@
 
     function btnchecked() {
         // let cnt = 0;
+        const count = document.getElementById("count");
         const p = document.getElementById("checkcnt");
+        const np = document.getElementById("uncheckcnt");
+
+        console.log(count);
         console.log("전체: " + $("input:checkbox[name='student']").length);
         console.log("선택: " + $("input:checkbox[name='student']:checked").length);
+
         p.innerText = $("input:checkbox[name='student']:checked").length;
+        np.innerText = parseInt(count.innerText) - $("input:checkbox[name='student']:checked").length;
     }
+
     function allCheckBtn() {
         if ($("#checkAll").prop('checked') == true) {
             $("input[name=student]:checkbox").prop("checked", true);
@@ -153,7 +160,7 @@
             <!-- 학번이름 가져와서 넣기 -->
 
             <% if(e_mail) { %>
-            <label class="user-info">2220<br><%=e_mail%></label>
+            <label class="user-info"><%=num%><br><%=e_mail%></label>
             <a href="/logout" class="">logout</a>
             <%} else { %>
                 <a href="/login" class="logout">Login</a>
@@ -163,8 +170,7 @@
         </header>
         <main class="main">
             <div class="dept-name">
-                <!-- 동아리 이름 가져와서 넣기 -->
-                <label>더무비</label>
+                <label><%= club_name %></label>
             </div>
 
             <div class="check-container">
@@ -176,29 +182,24 @@
 
                 <div class="check-right">
                     <!-- 여기도 추가 -->
-                    <p><label>전체 인원 명</label></p>
+                    <p><label>전체 인원 <span id="count"><%= count %></span> 명</label></p>
                     <p><label>출석 확인 <span id="checkcnt">0</span> 명</label></p>
                     <p><label>미확인 명</label></p>
-                    <p><label>결석 명</label></p>
+                    <p><label>결석 <span id="uncheckcnt"><%= count %></span> 명</label></p>
                     <button type="submit" class="submit">제출하기</button>
                 </div>
 
                 <div class="checklist">
+                <% for(var i=1; i<=3; i++) { %>
                     <div class="grade">
-                        <h2>1학년</h2>
-                        <br><input type="checkbox" name="student" id="s1" class="student"
-                            onclick="btnchecked()">김아련</input></br>
+                        <h2><%= i %>학년</h2>
+                        
+                        <% for (var j = 0; j < students[i]['length']; j++) { %>
+                            <br><input type="checkbox" name="student" id=`s${students[i][j]member_id}` class="student"
+                            onclick="btnchecked()"><%= students[i][j].name %></input></br>
+                        <% } %>
                     </div>
-                    <div class="grade">
-                        <h2>2학년</h2>
-                        <br><input type="checkbox" name="student" id="s2" class="student"
-                            onclick="btnchecked()">김아련</input></br>
-                    </div>
-                    <div class="grade">
-                        <h2>3학년</h2>
-                        <br><input type="checkbox" name="student" id="s3" class="student"
-                            onclick="btnchecked()">김아련</input></br>
-                    </div>
+                <% } %>
                 </div>
             </div>
         </main>
