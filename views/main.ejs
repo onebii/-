@@ -20,14 +20,16 @@
         height: 100px;
         display: flex;
         align-items: center;
+        justify-content: space-between;
+        padding: 10px 40px 0px 40px;
     }
 
-    img {
+    /* img {
         margin-left: 1105px;
         width: 30px;
         height: 30px;
         object-fit: contain;
-    }
+    } */
 
     .user-info {
         float: left;
@@ -122,7 +124,7 @@
     }
 
     function btnchecked() {
-        // let cnt = 0;
+        // let cnt = 0; 
         const p1 = document.getElementById("checkcnt");
         // console.log("전체: " + $("input:checkbox[name='student']").length);
         // console.log("선택: " + $("input:checkbox[name='student']:checked").length);
@@ -147,22 +149,26 @@
 <body>
     <form name="frmJoin" action="" style="border:1px solid #ccc" onSubmit="return CheckForm(this)">
         <header class="header">
-            <img id="profileimg" src="../public/user.png">
+            <!-- <img id="profileimg" src="../public/user.png"> -->
             <!-- 학번이름 가져와서 넣기 -->
 
             <% if(e_mail) { %>
-            <label class="user-info">2220<br><%=e_mail%></label>
-            <a href="/logout" class="">logout</a>
+                <label class="user-info"><%=e_mail%><br><%=num%></label>
+                <a href="/logout" class="">logout</a>
             <%} else { %>
                 <a href="/login" class="logout">Login</a>
-                <a href="/register" class="">register</a>
+                <a href="/register" class="logout">register</a>
             <% } %>
             
         </header>
         <main class="main">
             <div class="dept-name">
                 <!-- 동아리 이름 가져와서 넣기 -->
-                <label>더무비</label>
+                <% if(club_id) { %>
+                    <label><%=club_id%></label>
+                <%} else { %>
+                    
+                <% } %>
             </div>
 
             <div class="check-container">

@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/main', function(req, res, next) {
-  res.render('main', {e_mail: req.session.e_mail});
+  res.render('main', {e_mail: req.session.e_mail, num: "", club_id: ""});
 });
 
 router.get('/list', function(req, res){
@@ -17,6 +17,5 @@ router.get('/login', function(req, res){
 router.get('/register', function(req, res){
   res.render('register');
 });
-
 
 module.exports = router;
