@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/main', function(req, res, next) {
-  res.render('main', {e_mail: req.session.e_mail, num: "", club_id: ""});
+  res.render('main', {e_mail: req.session.e_mail, num: "", club_name: "", students: []});
 });
 
 router.get('/list', function(req, res){

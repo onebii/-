@@ -73,7 +73,7 @@
         padding: 20px;
         width: 350px;
         height: 100%;
-        overflow: scroll;
+        /* overflow: scroll; */
     }
 
     .grade {
@@ -105,7 +105,10 @@
     //     }
     // }
 
+    
     var arr_Student = document.getElementsByClassName("student");
+        
+
 
     function CheckForm(Join) {
         //체크박스 체크여부 확인 [동일 이름을 가진 체크박스 여러개일 경우]
@@ -126,9 +129,13 @@
     function btnchecked() {
         // let cnt = 0; 
         const p1 = document.getElementById("checkcnt");
+        const p2 = document.getElementById("cnt1");
+        const p3 = document.getElementById("allstu");
         // console.log("전체: " + $("input:checkbox[name='student']").length);
         // console.log("선택: " + $("input:checkbox[name='student']:checked").length);
         p1.innerText = $("input:checkbox[name='student']:checked").length;
+        p2.innerText = $("input:checkbox[name='student']").length - $("input:checkbox[name='student']:checked").length;
+        p3.innerText = $("input:checkbox[name='student']").length;
     }
     function allCheckBtn() {
         if ($("#checkAll").prop('checked') == true) {
@@ -136,7 +143,6 @@
         } else {
             $("input[name=student]:checkbox").prop("checked", false);
         }
-
         btnchecked();
     }
 </script>
@@ -151,12 +157,11 @@
         <header class="header">
             <!-- <img id="profileimg" src="../public/user.png"> -->
             <!-- 학번이름 가져와서 넣기 -->
-
             <% if(e_mail) { %>
                 <label class="user-info"><%=e_mail%><br><%=num%></label>
                 <a href="/logout" class="">logout</a>
             <%} else { %>
-                <a href="/login" class="logout">Login</a>
+                <a href="/login" class="logout">Logine</a>
                 <a href="/register" class="logout">register</a>
             <% } %>
             
@@ -164,36 +169,40 @@
         <main class="main">
             <div class="dept-name">
                 <!-- 동아리 이름 가져와서 넣기 -->
-                <% if(club_id) { %>
-                    <label><%=club_id%></label>
+                <% if(club_name) { %>
+                    <label><%=club_name%></label>
                 <%} else { %>
-                    
+                    <label>동아리명</label>
                 <% } %>
             </div>
 
             <div class="check-container">
                 <div class="check-left">
                     <input type="checkbox" id="checkAll" class="checkAll" onclick="allCheckBtn()"> 전체 선택</input>
-
                     <!-- 학년별 출석부 명단 가져와서 넣기 -->
                 </div>
-
                 <div class="check-right">
                     <!-- 여기도 추가 -->
-                    <p><label>전체 인원 명</label></p>
+                    <p><label>전체 인원 <span id="allstu">0</span> 명</label></p>
                     <p><label>출석 확인 <span id="checkcnt">0</span> 명</label></p>
-                    <p><label>미확인 명</label></p>
+                    <p><label>미확인 명 <span id="cnt1">0</span> 명</label></p>
                     <p><label>결석 명</label></p>
                     <button type="submit" class="submit">제출하기</button>
                 </div>
 
                 <div class="checklist">
                     <div class="grade">
-                        <h2>1학년</h2>
-                        <br><input type="checkbox" name="student" id="s1" class="student"
-                            onclick="btnchecked()">김아련</input></br>
+                        <h2>출석 명단</h2>
+                        <% if(students) {
+                            for(var i =0; i < students.length; i++){
+                                let data = students[i];%>
+                                <br><input type="checkbox" name="student" id="s1" class="student" onclick="btnchecked()"><%=data%></input></br>
+                            <% } %>
+                        <%} else { %>
+                            <br><input type="checkbox" name="student" id="s1" class="student" onclick="btnchecked()">학번</input></br>
+                        <% } %>
                     </div>
-                    <div class="grade">
+                    <!-- <div class="grade">
                         <h2>2학년</h2>
                         <br><input type="checkbox" name="student" id="s2" class="student"
                             onclick="btnchecked()">김아련</input></br>
@@ -202,7 +211,7 @@
                         <h2>3학년</h2>
                         <br><input type="checkbox" name="student" id="s3" class="student"
                             onclick="btnchecked()">김아련</input></br>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </main>
